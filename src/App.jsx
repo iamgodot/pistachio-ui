@@ -5,13 +5,13 @@ import {
   Route,
 } from "react-router-dom";
 import RootLayout from "./ui/RootLayout";
-import Homepage from "./ui/Homepage";
-import Profile from "./ui/Profile";
-import Login from "./ui/Login";
-import Register from "./ui/Register";
-import { AuthProvider } from "./contexts/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Logout from "./ui/Logout";
+import Newsfeed from "./features/newsfeed/Newsfeed";
+import Profile from "./features/profile/Profile";
+import Login from "./features/auth/Login";
+import Register from "./features/auth/Register";
+import { AuthProvider } from "./features/auth/AuthContext";
+import ProtectedRoute from "./features/auth/ProtectedRoute";
+import Logout from "./features/auth/Logout";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -22,7 +22,7 @@ export default function App() {
         </ProtectedRoute>
       ),
       children: [
-        { path: "", element: <Homepage /> },
+        { path: "", element: <Newsfeed /> },
         { path: "profile", element: <Profile /> },
       ],
     },

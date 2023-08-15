@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import loginImage from "../assets/pistachio.jpeg";
-import { useAuth } from "../contexts/AuthContext";
+import loginImage from "../../assets/pistachio.jpeg";
+import { useAuth } from "./AuthContext";
 
 // TODO: set from env
 //const CLIENT_ID = "35ed38dbee5282f1b162";
