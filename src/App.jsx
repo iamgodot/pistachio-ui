@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
 import RootLayout from "./ui/RootLayout";
 import Homepage from "./ui/Homepage";
 import Profile from "./ui/Profile";
@@ -9,26 +14,25 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Logout from "./ui/Logout";
 
 export default function App() {
+  const router = createBrowserRouter([
+    {
+      element: (
+        <ProtectedRoute>
+          <RootLayout />
+        </ProtectedRoute>
+      ),
+      children: [
+        { path: "", element: <Homepage /> },
+        { path: "profile", element: <Profile /> },
+      ],
+    },
+    { path: "login", element: <Login /> },
+    { path: "logout", element: <Logout /> },
+    { path: "register", element: <Register /> },
+  ]);
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <RootLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Homepage />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-          <Route path="login" element={<Login />} />
-          <Route path="logout" element={<Logout />} />
-          <Route path="register" element={<Register />} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />;
     </AuthProvider>
   );
 }
