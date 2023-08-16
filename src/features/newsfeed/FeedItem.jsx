@@ -1,9 +1,14 @@
 import { Viewer, Worker, SpecialZoomLevel } from "@react-pdf-viewer/core";
+import { Link } from "react-router-dom";
 
 export default function FeedItem({ author, description, file }) {
   return (
     <div className="my-4 p-5 rounded-2xl drop-shadow-lg border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-      <ItemHeader avatarUrl={author.avatar} userName={author.nickname} />
+      <ItemHeader
+        avatarUrl={author.avatar}
+        userName={author.nickname}
+        userId={author.id}
+      />
       <Divider margin={4} border={1} />
       <ItemContent description={description} fileUrl={file.url} />
       <ItemFooter
@@ -14,12 +19,14 @@ export default function FeedItem({ author, description, file }) {
     </div>
   );
 }
-function ItemHeader({ avatarUrl, userName }) {
+function ItemHeader({ avatarUrl, userName, userId }) {
   return (
-    <div className="flex flex-row items-end">
-      <img className="w-8 h-8 rounded-full mr-2" src={avatarUrl} alt="" />
-      <span className="font-bold">{userName}</span>
-    </div>
+    <Link to={`users/${userId}`}>
+      <div className="flex flex-row items-end">
+        <img className="w-8 h-8 rounded-full mr-2" src={avatarUrl} alt="" />
+        <span className="font-bold">{userName}</span>
+      </div>
+    </Link>
   );
 }
 function ItemContent({ description, fileUrl }) {
