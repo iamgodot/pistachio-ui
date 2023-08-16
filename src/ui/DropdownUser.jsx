@@ -6,7 +6,7 @@ const DropdownUser = () => {
   const user = useLoaderData();
   return (
     <div className="relative">
-      <Link className="flex items-center gap-4" to="#">
+      <Link className="flex items-center gap-4" to="profile">
         <span className="text-right block">
           <span className="block text-sm font-medium text-black dark:text-white">
             {user.nickname}
