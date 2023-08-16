@@ -12,6 +12,8 @@ import Register from "./features/auth/Register";
 import { AuthProvider } from "./features/auth/AuthContext";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
 import Logout from "./features/auth/Logout";
+import { loader as userLoader } from "./ui/DropdownUser";
+import { loader as feedsLoader } from "./features/newsfeed/Newsfeed";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -21,8 +23,13 @@ export default function App() {
           <RootLayout />
         </ProtectedRoute>
       ),
+      loader: userLoader,
       children: [
-        { path: "", element: <Newsfeed /> },
+        {
+          path: "/",
+          element: <Newsfeed />,
+          loader: feedsLoader,
+        },
         { path: "profile", element: <Profile /> },
       ],
     },
