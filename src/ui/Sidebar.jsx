@@ -1,4 +1,10 @@
-import { BiHome, BiSolidFace, BiLogOut } from "react-icons/bi";
+import {
+  BiSolidFace,
+  BiLogOut,
+  BiCog,
+  BiNews,
+  BiGlassesAlt,
+} from "react-icons/bi";
 import { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
@@ -8,10 +14,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const sidebar = useRef(null);
 
   const menuItems = [
-    { name: "Newsfeed", link: "", icon: <BiHome size={20} /> },
+    { name: "Newsfeed", link: "", icon: <BiNews size={20} /> },
     { name: "Profile", link: "profile", icon: <BiSolidFace size={20} /> },
-    { name: "Settings", link: "settings", icon: <BiSolidFace size={20} /> },
-    { name: "Posts", link: "posts", icon: <BiSolidFace size={20} /> },
+    { name: "Posts", link: "posts", icon: <BiGlassesAlt size={20} /> },
+    { name: "Settings", link: "settings", icon: <BiCog size={20} /> },
     { name: "Logout", link: "logout", icon: <BiLogOut size={20} /> },
   ];
 
