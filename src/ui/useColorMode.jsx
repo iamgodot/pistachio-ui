@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 
 const useColorMode = () => {
   //   const [colorMode, setColorMode] = useLocalStorage('color-theme', 'light');
-  const [colorMode, setColorMode] = useState("dark");
+  const [colorMode, setColorMode] = useState(() => {
+    const value = localStorage.getItem("color-theme", "dark");
+    return value;
+  });
 
   useEffect(() => {
     const className = "dark";
@@ -11,6 +14,7 @@ const useColorMode = () => {
     colorMode === "dark"
       ? bodyClass.add(className)
       : bodyClass.remove(className);
+    localStorage.setItem("color-theme", colorMode);
   }, [colorMode]);
 
   return [colorMode, setColorMode];
