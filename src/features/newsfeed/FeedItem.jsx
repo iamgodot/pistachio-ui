@@ -21,7 +21,7 @@ export default function FeedItem({ author, description, file }) {
 }
 function ItemHeader({ avatarUrl, userName, userId }) {
   return (
-    <Link to={`users/${userId}`}>
+    <Link to={`/users/${userId}`}>
       <div className="flex flex-row items-end">
         <img className="w-8 h-8 rounded-full mr-2" src={avatarUrl} alt="" />
         <span className="font-bold">{userName}</span>
