@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import loginImage from "../../assets/pistachio.jpeg";
 import { useAuth } from "./AuthContext";
 
-// TODO: set from env
-//const CLIENT_ID = "35ed38dbee5282f1b162";
-const CLIENT_ID = "0f7384bc5db7077161c9";
+const CLIENT_ID = import.meta.env.VITE_GH_OAUTH_CLIENT_ID;
+
 export default function Login() {
   const navigate = useNavigate();
   const { isAuthenticated, loginGitHub } = useAuth();
