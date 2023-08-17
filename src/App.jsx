@@ -14,6 +14,9 @@ import { loader as feedsLoader } from "./features/newsfeed/Newsfeed";
 import { loader as profileLoader } from "./features/profile/Profile";
 import { action as updateUserAction } from "./features/profile/Settings";
 import { loader as userLoader } from "./features/profile/User";
+import CreatedPost from "./features/post/CreatedPost";
+import PostLayout from "./features/post/PostLayout";
+import { loader as postsLoader } from "./features/post/CreatedPost";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -39,6 +42,13 @@ export default function App() {
           action: updateUserAction,
         },
         { path: "users/:userId", element: <User />, loader: userLoader },
+        {
+          path: "posts",
+          element: <PostLayout />,
+          children: [
+            { index: true, element: <CreatedPost />, loader: postsLoader },
+          ],
+        },
       ],
     },
     { path: "login", element: <Login /> },

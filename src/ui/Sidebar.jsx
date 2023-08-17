@@ -11,6 +11,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     { name: "Newsfeed", link: "", icon: <BiHome size={20} /> },
     { name: "Profile", link: "profile", icon: <BiSolidFace size={20} /> },
     { name: "Settings", link: "settings", icon: <BiSolidFace size={20} /> },
+    { name: "Posts", link: "posts", icon: <BiSolidFace size={20} /> },
     { name: "Logout", link: "logout", icon: <BiLogOut size={20} /> },
   ];
 
