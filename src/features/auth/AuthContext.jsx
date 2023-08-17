@@ -1,11 +1,8 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
+import { getUser } from "../../services/backendApi";
 
 const AuthContext = createContext();
-const initialState = {
-  user: null,
-  isAuthenticated: localStorage.getItem("accessToken") ? true : false,
-};
 
 function reducer(state, action) {
   switch (action.type) {
@@ -19,10 +16,23 @@ function reducer(state, action) {
 }
 
 function AuthProvider({ children }) {
+  const initialState = {
+    user: null,
+    isAuthenticated: false,
+  };
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
   );
+
+  useEffect(() => {
+    (async () => {
+      const user = await getUser();
+      if (Object.keys(user).length !== 0) {
+        dispatch({ type: "login", payload: user });
+      }
+    })();
+  }, []);
 
   function login({ email, password }) {
     axios.post("/api/v1/login", { email, password }).then((response) => {

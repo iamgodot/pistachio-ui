@@ -4,10 +4,14 @@ const API_PREFIX = "/api/v1";
 
 export async function getUser() {
   const accessToken = localStorage.getItem("accessToken");
-  const response = await axios.get(`${API_PREFIX}/user`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
-  return response.data;
+  try {
+    const response = await axios.get(`${API_PREFIX}/user`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return response.data;
+  } catch (error) {
+    return {};
+  }
 }
 export async function getUserById(userId) {
   const accessToken = localStorage.getItem("accessToken");
