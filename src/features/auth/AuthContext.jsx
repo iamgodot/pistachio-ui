@@ -27,9 +27,11 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     (async () => {
-      const user = await getUser();
-      if (Object.keys(user).length !== 0) {
-        dispatch({ type: "login", payload: user });
+      if (localStorage.getItem("accessToken")) {
+        const user = await getUser();
+        if (Object.keys(user).length !== 0) {
+          dispatch({ type: "login", payload: user });
+        }
       }
     })();
   }, []);
