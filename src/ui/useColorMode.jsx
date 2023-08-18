@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { getFromLocalStorage, setFromLocalStorage } from "../utils";
 
 const useColorMode = () => {
-  //   const [colorMode, setColorMode] = useLocalStorage('color-theme', 'light');
   const [colorMode, setColorMode] = useState(() => {
-    const value = localStorage.getItem("color-theme", "dark");
+    const value = getFromLocalStorage("color-theme", "light");
     return value;
   });
 
@@ -14,7 +14,7 @@ const useColorMode = () => {
     colorMode === "dark"
       ? bodyClass.add(className)
       : bodyClass.remove(className);
-    localStorage.setItem("color-theme", colorMode);
+    setFromLocalStorage("color-theme", colorMode);
   }, [colorMode]);
 
   return [colorMode, setColorMode];

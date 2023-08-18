@@ -1,6 +1,11 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import { getUser } from "../../services/backendApi";
+import {
+  getFromLocalStorage,
+  setFromLocalStorage,
+  deleteFromLocalStorage,
+} from "../../utils";
 
 const AuthContext = createContext();
 
@@ -27,7 +32,7 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     (async () => {
-      if (localStorage.getItem("accessToken")) {
+      if (getFromLocalStorage("accessToken")) {
         const user = await getUser();
         if (Object.keys(user).length !== 0) {
           dispatch({ type: "login", payload: user });
@@ -40,7 +45,7 @@ function AuthProvider({ children }) {
     axios.post("/api/v1/login", { email, password }).then((response) => {
       const data = response.data;
       if (response.status === 200 && data.access_token) {
-        localStorage.setItem("accessToken", data.access_token);
+        setFromLocalStorage("accessToken", data.access_token);
         dispatch({ type: "login", payload: data });
       }
     });
@@ -51,13 +56,13 @@ function AuthProvider({ children }) {
       .then((response) => {
         const data = response.data;
         if (response.status === 200 && data.access_token) {
-          localStorage.setItem("accessToken", data.access_token);
+          setFromLocalStorage("accessToken", data.access_token);
           dispatch({ type: "login", payload: data });
         }
       });
   }
   function logout() {
-    localStorage.removeItem("accessToken");
+    deleteFromLocalStorage("accessToken");
     dispatch({ type: "logout" });
   }
   return (
