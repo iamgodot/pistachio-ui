@@ -1,7 +1,6 @@
 import { getUserById } from "../../services/backendApi";
 import UserElement from "./UserElement";
 import { useLoaderData } from "react-router-dom";
-import { getUser } from "../../services/mockApi";
 
 export default function User() {
   const user = useLoaderData();

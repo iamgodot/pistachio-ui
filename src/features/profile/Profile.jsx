@@ -8,6 +8,6 @@ export default function Profile() {
 }
 
 export async function loader() {
-  const user = getUser();
+  const user = await getUser();
   return user;
 }

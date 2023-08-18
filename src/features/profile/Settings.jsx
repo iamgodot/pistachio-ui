@@ -165,6 +165,6 @@ export default function Settings() {
 export async function action({ request }) {
   const formData = await request.formData();
   const payload = Object.fromEntries(formData);
-  const _ = updateUser(payload);
+  await updateUser(payload);
   return redirect("/profile");
 }
