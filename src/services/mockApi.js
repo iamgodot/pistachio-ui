@@ -69,3 +69,29 @@ export function getUserPosts() {
     },
   ];
 }
+
+export function getPost(postId) {
+  return {
+    id: 1,
+    author: {
+      id: 1,
+      nickname: "Godot",
+      avatar: "https://i.pravatar.cc/150?img=2",
+    },
+    description:
+      "Requirements of applying for a study permit in Canada: 1. Passport 2.  Offer letter 3. Study plan 4. Foobar",
+    file_url: samplePDF,
+    file_size: "500 KB",
+    created_at: "2023-08-08",
+  };
+}
+
+export function getPostSummary(postId) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        "orem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque posuere fermentum urna, eu condimentum mauris tempus ut. Donec fermentum blandit aliquet."
+      );
+    }, 3000);
+  });
+}
