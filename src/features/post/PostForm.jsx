@@ -1,47 +1,13 @@
 import { useRef, useState } from "react";
-import axios from "axios";
 import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import { useLoaderData } from "react-router-dom";
-import { getFeeds } from "../../services/mockApi";
-import FeedItem from "./FeedItem";
 import { createPost } from "../../services/backendApi";
 
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
-export function loader() {
-  return getFeeds();
-}
-
-export default function Newsfeed() {
-  const feeds = useLoaderData();
-  return (
-    <div className="flex justify-center">
-      <div className="w-2/3">
-        <PostForm />
-        {feeds.map(
-          ({ id, author, description, file_size, file_url, created_at }) => (
-            <FeedItem
-              key={id}
-              author={author}
-              description={description}
-              file={{
-                size: file_size,
-                url: file_url,
-                date: created_at,
-              }}
-            />
-          )
-        )}
-      </div>
-    </div>
-  );
-}
-
-function PostForm() {
+export default function PostForm() {
   const pond = useRef(null);
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
