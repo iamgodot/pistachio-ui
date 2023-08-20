@@ -6,7 +6,7 @@ import {
 } from "@react-pdf-viewer/core";
 import { Link } from "react-router-dom";
 
-export default function PostElement({ author, description, file }) {
+export default function PostElement({ postId, author, description, file }) {
   return (
     <div className="my-4 p-5 rounded-2xl drop-shadow-lg border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <ItemHeader
@@ -15,16 +15,15 @@ export default function PostElement({ author, description, file }) {
         userId={author.id}
       />
       <Divider margin={4} border={1} />
-      <ItemContent description={description} fileUrl={file.url} />
-      <ItemFooter
-        fileSize={file.size}
-        postDate={file.date}
+      <ItemContent
+        postId={postId}
+        description={description}
         fileUrl={file.url}
       />
     </div>
   );
 }
-function ItemHeader({ avatarUrl, userName, userId }) {
+export function ItemHeader({ avatarUrl, userName, userId }) {
   return (
     <Link to={`/users/${userId}`}>
       <div className="flex flex-row items-end">
@@ -34,26 +33,28 @@ function ItemHeader({ avatarUrl, userName, userId }) {
     </Link>
   );
 }
-function ItemContent({ description, fileUrl }) {
+function ItemContent({ postId, description, fileUrl }) {
   return (
-    <div>
-      <h3 className="text-lg font-bold mb-4">Description:</h3>
-      <p>{description}</p>
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.js">
-        <div className="h-96 my-4">
-          <Viewer
-            fileUrl={fileUrl}
-            defaultScale={SpecialZoomLevel.PageFit}
-            theme="light"
-            scrollMode={ScrollMode.Page}
-            //initialPage={1}
-          />
-        </div>
-      </Worker>
-    </div>
+    <Link to={`/posts/${postId}`}>
+      <div>
+        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.js">
+          <div className="h-96 my-4">
+            <Viewer
+              fileUrl={fileUrl}
+              defaultScale={SpecialZoomLevel.PageFit}
+              theme="light"
+              scrollMode={ScrollMode.Page}
+              //initialPage={1}
+            />
+          </div>
+        </Worker>
+        {/* <h3 className="text-lg font-bold mb-4">Description:</h3> */}
+        <p className="mt-4">{description}</p>
+      </div>
+    </Link>
   );
 }
-function ItemFooter({ fileSize, postDate, fileUrl }) {
+export function ItemFooter({ fileSize, postDate, openModal }) {
   return (
     <div className="mt-8 mb-3 flex flex-row justify-between">
       <div>
@@ -62,20 +63,20 @@ function ItemFooter({ fileSize, postDate, fileUrl }) {
         <p>Posted on: {postDate}</p>
       </div>
       <div className="flex flex-col justify-between">
-        <Button text="View" />
-        <a href={fileUrl} download>
-          <Button text="Download" />
-        </a>
+        <Button text="Get summary" handleClick={openModal} />
       </div>
     </div>
   );
 }
-function Divider({ margin, border }) {
+export function Divider({ margin, border }) {
   return <hr className={`my-${margin} border-${border} border-gray-300`}></hr>;
 }
-function Button({ text }) {
+function Button({ text, handleClick }) {
   return (
-    <button className="inline-flex items-center justify-center rounded-md border border-meta-3 py-2 px-4 text-center font-medium text-meta-3 hover:bg-opacity-90 lg:px-8 xl:px-10">
+    <button
+      className="inline-flex items-center justify-center rounded-md bg-meta-3 py-2 px-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+      onClick={() => handleClick()}
+    >
       {text}
     </button>
   );

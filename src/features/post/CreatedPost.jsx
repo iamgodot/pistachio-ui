@@ -10,6 +10,7 @@ export default function CreatedPost() {
         ({ id, author, description, file_size, file_url, created_at }) => (
           <PostElement
             key={id}
+            postId={id}
             author={author}
             description={description}
             file={{
