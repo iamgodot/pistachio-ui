@@ -54,7 +54,6 @@ export default function PostDetail() {
           <p className="mt-4">{post.description}</p>
           <Divider margin={4} border={1} />
           <ItemFooter
-            fileSize={post.file_size}
             postDate={post.created_at}
             openModal={() => setShowModal(true)}
           />

@@ -7,14 +7,13 @@ export default function CreatedPost() {
   return (
     <>
       {feeds.map(
-        ({ id, author, description, file_size, file_url, created_at }) => (
+        ({ id, author, description, file_url, created_at }) => (
           <PostElement
             key={id}
             postId={id}
             author={author}
             description={description}
             file={{
-              size: file_size,
               url: file_url,
               date: created_at,
             }}

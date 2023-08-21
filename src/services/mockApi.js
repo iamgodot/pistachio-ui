@@ -21,7 +21,6 @@ export function getFeeds() {
       description:
         "Requirements of applying for a study permit in Canada: 1. Passport 2.  Offer letter 3. Study plan",
       file_url: samplePDF,
-      file_size: "500 KB",
       created_at: "2023-08-08",
     },
     {
@@ -34,7 +33,6 @@ export function getFeeds() {
       description:
         "Requirements of applying for a study permit in Canada: 1. Passport 2.  Offer letter 3. Study plan 4. Foobar",
       file_url: samplePDF,
-      file_size: "500KB",
       created_at: "2023-08-08",
     },
   ];
@@ -51,7 +49,6 @@ export function getUserPosts() {
       },
       description: "Loo",
       file_url: samplePDF,
-      file_size: "500 KB",
       created_at: "2023-08-08",
     },
     {
@@ -64,7 +61,6 @@ export function getUserPosts() {
       description:
         "Requirements of applying for a study permit in Canada: 1. Passport 2.  Offer letter 3. Study plan 4. Foobar",
       file_url: samplePDF,
-      file_size: "500KB",
       created_at: "2023-08-08",
     },
   ];
@@ -81,7 +77,6 @@ export function getPost(postId) {
     description:
       "Requirements of applying for a study permit in Canada: 1. Passport 2.  Offer letter 3. Study plan 4. Foobar",
     file_url: samplePDF,
-    file_size: "500 KB",
     created_at: "2023-08-08",
   };
 }

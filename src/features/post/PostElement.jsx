@@ -54,12 +54,10 @@ function ItemContent({ postId, description, fileUrl }) {
     </Link>
   );
 }
-export function ItemFooter({ fileSize, postDate, openModal }) {
+export function ItemFooter({ postDate, openModal }) {
   return (
     <div className="mt-8 mb-3 flex flex-row justify-between">
       <div>
-        <h3 className="text-lg font-bold mb-4">Metadata:</h3>
-        <p>File size: {fileSize}</p>
         <p>Posted on: {postDate}</p>
       </div>
       <div className="flex flex-col justify-between">

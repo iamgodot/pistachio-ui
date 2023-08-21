@@ -42,6 +42,14 @@ export async function updateUser({ nickname, bio }) {
   return response;
 }
 
+export async function getPosts() {
+  const accessToken = getFromLocalStorage("accessToken");
+  const response = await axios.get(`${API_PREFIX}/posts`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  return response.data;
+}
+
 export async function getPostSummary(postId) {
   const accessToken = getFromLocalStorage("accessToken");
   const response = await axios.get(`${API_PREFIX}/posts/${postId}/summary`, {

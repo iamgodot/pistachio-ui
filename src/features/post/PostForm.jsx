@@ -66,7 +66,7 @@ export default function PostForm() {
               //server="/api"
               //name="files" /* sets the file input name, it's filepond by default */
               acceptedFileTypes={["application/pdf"]}
-              maxFileSize="100MB"
+              maxFileSize="10MB"
               labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
             />
           </div>
