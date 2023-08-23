@@ -19,46 +19,56 @@ import PostLayout from "./features/post/PostLayout";
 import PostDetail from "./features/post/PostDetail";
 import { loader as postsLoader } from "./features/post/CreatedPost";
 import { loader as postLoader } from "./features/post/PostDetail";
+import Toast from "./ui/Toast";
 
 export default function App() {
   const router = createBrowserRouter([
     {
-      path: "",
-      element: (
-        <ProtectedRoute>
-          <RootLayout />
-        </ProtectedRoute>
-      ),
-      loader: dropdownUserLoader,
+      element: <Toast />,
       children: [
         {
-          index: true,
-          element: <Newsfeed />,
-          loader: feedsLoader,
-        },
-        { path: "profile", element: <Profile />, loader: profileLoader },
-        {
-          path: "settings",
-          element: <Settings />,
-          loader: profileLoader,
-          action: updateUserAction,
-        },
-        { path: "users/:userId", element: <User />, loader: userLoader },
-        {
-          path: "posts",
+          path: "",
           element: (
-            <PostLayout>
-              <CreatedPost />
-            </PostLayout>
+            <ProtectedRoute>
+              <RootLayout />
+            </ProtectedRoute>
           ),
-          loader: postsLoader,
+          loader: dropdownUserLoader,
+          children: [
+            {
+              index: true,
+              element: <Newsfeed />,
+              loader: feedsLoader,
+            },
+            { path: "profile", element: <Profile />, loader: profileLoader },
+            {
+              path: "settings",
+              element: <Settings />,
+              loader: profileLoader,
+              action: updateUserAction,
+            },
+            { path: "users/:userId", element: <User />, loader: userLoader },
+            {
+              path: "posts",
+              element: (
+                <PostLayout>
+                  <CreatedPost />
+                </PostLayout>
+              ),
+              loader: postsLoader,
+            },
+            {
+              path: "posts/:postId",
+              element: <PostDetail />,
+              loader: postLoader,
+            },
+          ],
         },
-        { path: "posts/:postId", element: <PostDetail />, loader: postLoader },
+        { path: "login", element: <Login /> },
+        { path: "logout", element: <Logout /> },
+        { path: "register", element: <Register /> },
       ],
     },
-    { path: "login", element: <Login /> },
-    { path: "logout", element: <Logout /> },
-    { path: "register", element: <Register /> },
   ]);
   return (
     <AuthProvider>

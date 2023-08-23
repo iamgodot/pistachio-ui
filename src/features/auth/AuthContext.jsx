@@ -6,6 +6,7 @@ import {
   setFromLocalStorage,
   deleteFromLocalStorage,
 } from "../../utils";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -42,13 +43,20 @@ function AuthProvider({ children }) {
   }, []);
 
   function login({ email, password }) {
-    axios.post("/api/v1/login", { email, password }).then((response) => {
-      const data = response.data;
-      if (response.status === 200 && data.access_token) {
-        setFromLocalStorage("accessToken", data.access_token);
-        dispatch({ type: "login", payload: data });
-      }
-    });
+    axios
+      .post("/api/v1/login", { email, password })
+      .then((response) => {
+        const data = response.data;
+        if (response.status === 200 && data.access_token) {
+          toast.success("You're logged in");
+          setFromLocalStorage("accessToken", data.access_token);
+          dispatch({ type: "login", payload: data });
+        }
+      })
+      .catch((error) => {
+        toast.error("Login failed");
+        console.log("Login error", error.message);
+      });
   }
   function loginGitHub({ codeParam }) {
     axios
@@ -56,9 +64,14 @@ function AuthProvider({ children }) {
       .then((response) => {
         const data = response.data;
         if (response.status === 200 && data.access_token) {
+          toast.success("You're logged in via GitHub");
           setFromLocalStorage("accessToken", data.access_token);
           dispatch({ type: "login", payload: data });
         }
+      })
+      .catch((error) => {
+        toast.error("Login via GitHub failed");
+        console.log("Login error", error.message);
       });
   }
   function logout() {

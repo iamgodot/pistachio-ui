@@ -4,6 +4,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import { createPost } from "../../services/backendApi";
+import { toast } from "react-toastify";
 
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
@@ -24,9 +25,9 @@ export default function PostForm() {
     }
     data.append("file", file.file);
     data.append("description", description);
-    //data.append("user_id", user.id);
     const response = await createPost(data);
     if (response.status === 201) {
+      toast.success("Post created");
       setFile(null);
       setDescription("");
       if (pond.current && pond.current.getFiles().length > 0)

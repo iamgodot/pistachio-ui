@@ -1,5 +1,6 @@
 import { useLoaderData, redirect, Form } from "react-router-dom";
 import { updateUser } from "../../services/backendApi";
+import { toast } from "react-toastify";
 
 export default function Settings() {
   const user = useLoaderData();
@@ -166,5 +167,6 @@ export async function action({ request }) {
   const formData = await request.formData();
   const payload = Object.fromEntries(formData);
   await updateUser(payload);
+  toast.success("Profile updated");
   return redirect("/profile");
 }
